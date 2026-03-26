@@ -1,0 +1,5 @@
+{
+  "name": "Smart India Assistant",
+  "description": "Integrated Public Service Platform for Indian citizens to access government schemes, scholarships, hospitals, and register complaints.",
+  "requestFramePermissions": ["geolocation"]
+}

@@ -1,0 +1,107 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user profile information for personalization.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user ID from Firebase Auth." },
+        "displayName": { "type": "string", "description": "User's full name." },
+        "email": { "type": "string", "format": "email", "description": "User's email address." },
+        "age": { "type": "integer", "description": "User's age." },
+        "income": { "type": "number", "description": "User's annual income." },
+        "education": { "type": "string", "description": "User's highest education level." },
+        "location": { "type": "string", "description": "User's city/state." },
+        "occupation": { "type": "string", "description": "User's current occupation." },
+        "role": { "type": "string", "enum": ["user", "admin"], "description": "User's role in the system." }
+      },
+      "required": ["uid", "displayName", "email", "role"]
+    },
+    "GovernmentScheme": {
+      "title": "Government Scheme",
+      "description": "Details about government schemes available to citizens.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Scheme name." },
+        "description": { "type": "string", "description": "Detailed description of the scheme." },
+        "benefits": { "type": "string", "description": "Benefits provided by the scheme." },
+        "eligibility": { "type": "object", "description": "Eligibility criteria (age, income, etc.)." },
+        "applyLink": { "type": "string", "format": "uri", "description": "Link to apply for the scheme." },
+        "category": { "type": "string", "description": "Category of the scheme (e.g., Health, Education)." }
+      },
+      "required": ["title", "description", "benefits", "applyLink"]
+    },
+    "Scholarship": {
+      "title": "Scholarship",
+      "description": "Available scholarships for students.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Scholarship name." },
+        "description": { "type": "string", "description": "Description of the scholarship." },
+        "deadline": { "type": "string", "format": "date", "description": "Application deadline." },
+        "applyLink": { "type": "string", "format": "uri", "description": "Link to apply." },
+        "eligibility": { "type": "object", "description": "Eligibility criteria (marks, income, category)." }
+      },
+      "required": ["title", "deadline", "applyLink"]
+    },
+    "Hospital": {
+      "title": "Hospital",
+      "description": "Information about nearby hospitals.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Hospital name." },
+        "address": { "type": "string", "description": "Hospital address." },
+        "contact": { "type": "string", "description": "Contact number." },
+        "location": { "type": "object", "description": "Geographic coordinates (lat, lng)." }
+      },
+      "required": ["name", "address"]
+    },
+    "Complaint": {
+      "title": "Public Complaint",
+      "description": "Complaints registered by citizens.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "UID of the user who registered the complaint." },
+        "category": { "type": "string", "enum": ["Road", "Garbage", "Water", "Street Light", "Pollution"], "description": "Category of the complaint." },
+        "description": { "type": "string", "description": "Details of the complaint." },
+        "imageUrl": { "type": "string", "format": "uri", "description": "URL of the uploaded image." },
+        "location": { "type": "string", "description": "Location of the issue." },
+        "status": { "type": "string", "enum": ["Pending", "In Progress", "Resolved"], "description": "Current status of the complaint." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the complaint was created." }
+      },
+      "required": ["uid", "category", "description", "status", "createdAt"]
+    },
+    "Job": {
+      "title": "Job Recommendation",
+      "description": "Recommended jobs based on skills.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Job title." },
+        "company": { "type": "string", "description": "Company name." },
+        "skillsRequired": { "type": "array", "items": { "type": "string" }, "description": "List of required skills." },
+        "applyLink": { "type": "string", "format": "uri", "description": "Link to apply." }
+      },
+      "required": ["title", "company", "applyLink"]
+    },
+    "Course": {
+      "title": "Skill Course",
+      "description": "Recommended courses to improve skills.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Course title." },
+        "provider": { "type": "string", "description": "Course provider (e.g., Coursera, NPTEL)." },
+        "link": { "type": "string", "format": "uri", "description": "Link to the course." }
+      },
+      "required": ["title", "provider", "link"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "User profiles." },
+    "/schemes/{schemeId}": { "schema": "GovernmentScheme", "description": "Government schemes." },
+    "/scholarships/{scholarshipId}": { "schema": "Scholarship", "description": "Scholarships." },
+    "/hospitals/{hospitalId}": { "schema": "Hospital", "description": "Hospitals." },
+    "/complaints/{complaintId}": { "schema": "Complaint", "description": "Public complaints." },
+    "/jobs/{jobId}": { "schema": "Job", "description": "Job recommendations." },
+    "/courses/{courseId}": { "schema": "Course", "description": "Skill courses." }
+  }
+}
