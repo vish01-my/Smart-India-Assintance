@@ -40,6 +40,7 @@
         "description": { "type": "string", "description": "Description of the scholarship." },
         "deadline": { "type": "string", "format": "date", "description": "Application deadline." },
         "applyLink": { "type": "string", "format": "uri", "description": "Link to apply." },
+        "imageUrl": { "type": "string", "format": "uri", "description": "URL of the scholarship image." },
         "eligibility": { "type": "object", "description": "Eligibility criteria (marks, income, category)." }
       },
       "required": ["title", "deadline", "applyLink"]

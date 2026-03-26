@@ -62,8 +62,8 @@ export default function Dashboard() {
             <AlertCircle size={20} className="text-neutral-400" />
             Complaint Status
           </h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="99%" height={250}>
               <BarChart data={complaintData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#737373' }} />
