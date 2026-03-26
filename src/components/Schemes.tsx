@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../hooks/useAuth';
-import { FileText, Search, Filter, CheckCircle, ExternalLink, Info } from 'lucide-react';
+import { FileText, Search, Filter, CheckCircle, ExternalLink, Info, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 export default function Schemes() {
@@ -105,8 +105,16 @@ export default function Schemes() {
             placeholder="Search schemes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-white border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900 transition-all"
+            className="w-full pl-10 pr-10 py-2 bg-white border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900 transition-all shadow-sm"
           />
+          {searchTerm && (
+            <button 
+              onClick={() => setSearchTerm('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-900 transition-colors"
+            >
+              <X size={16} />
+            </button>
+          )}
         </div>
         <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
           {categories.map((category) => (
@@ -162,19 +170,19 @@ export default function Schemes() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <a
-                    href={scheme.applyLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-neutral-900 text-white rounded-lg text-sm font-medium hover:bg-neutral-800 transition-colors"
-                  >
-                    Apply Now <ExternalLink size={14} />
-                  </a>
-                  <button className="p-2 border border-neutral-200 rounded-lg text-neutral-400 hover:text-neutral-900 hover:border-neutral-900 transition-all">
-                    <Info size={18} />
-                  </button>
-                </div>
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={scheme.applyLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-neutral-900 text-white rounded-lg text-sm font-medium hover:bg-neutral-800 transition-colors"
+                    >
+                      Apply <ExternalLink size={14} />
+                    </a>
+                    <button className="p-2 border border-neutral-200 rounded-lg text-neutral-400 hover:text-neutral-900 hover:border-neutral-900 transition-all">
+                      <Info size={18} />
+                    </button>
+                  </div>
               </div>
             </div>
           ))}

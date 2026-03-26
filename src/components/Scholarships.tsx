@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../hooks/useAuth';
-import { GraduationCap, Search, Filter, Calendar, ExternalLink, Info, CheckCircle } from 'lucide-react';
+import { GraduationCap, Search, Filter, Calendar, ExternalLink, Info, CheckCircle, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 export default function Scholarships() {
@@ -104,8 +104,16 @@ export default function Scholarships() {
             placeholder="Search scholarships..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-white border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900 transition-all shadow-sm"
+            className="w-full pl-10 pr-10 py-2 bg-white border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900 transition-all shadow-sm"
           />
+          {searchTerm && (
+            <button 
+              onClick={() => setSearchTerm('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-900 transition-colors"
+            >
+              <X size={16} />
+            </button>
+          )}
         </div>
         <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
           {categories.map((category) => (

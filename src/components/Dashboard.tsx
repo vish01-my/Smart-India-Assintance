@@ -1,6 +1,6 @@
 import { useAuth } from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
-import { FileText, GraduationCap, Hospital, AlertCircle, ArrowRight, CheckCircle, Clock } from 'lucide-react';
+import { FileText, GraduationCap, Hospital, AlertCircle, ArrowRight, CheckCircle, Clock, ExternalLink } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 export default function Dashboard() {
@@ -95,18 +95,29 @@ export default function Dashboard() {
           </div>
           <div className="space-y-4">
             {[
-              { title: 'PM-Kisan Samman Nidhi', category: 'Agriculture', status: 'Eligible' },
-              { title: 'Ayushman Bharat', category: 'Health', status: 'Eligible' },
-              { title: 'PM Awas Yojana', category: 'Housing', status: 'Check Details' },
+              { title: 'PM-Kisan Samman Nidhi', category: 'Agriculture', status: 'Eligible', link: 'https://pmkisan.gov.in/' },
+              { title: 'Ayushman Bharat', category: 'Health', status: 'Eligible', link: 'https://pmjay.gov.in/' },
+              { title: 'PM Awas Yojana', category: 'Housing', status: 'Check Details', link: 'https://pmay-urban.gov.in/' },
             ].map((scheme) => (
               <div key={scheme.title} className="flex items-center justify-between p-4 rounded-xl bg-neutral-50 border border-neutral-100">
-                <div>
+                <div className="flex-1">
                   <h4 className="text-sm font-bold text-neutral-900">{scheme.title}</h4>
                   <p className="text-xs text-neutral-500">{scheme.category}</p>
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-white border border-neutral-200 rounded-full text-neutral-600">
-                  {scheme.status}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-white border border-neutral-200 rounded-full text-neutral-600">
+                    {scheme.status}
+                  </span>
+                  <a 
+                    href={scheme.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-2 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors"
+                    title="Apply Now"
+                  >
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
               </div>
             ))}
           </div>
